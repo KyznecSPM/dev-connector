@@ -1,29 +1,19 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const connectDB = require('./config/db');
 
 const app = express();
 
-// DB Config
-const db = require('./config/keys').mongoURI;
+// Connect Database
+connectDB();
 
-// Connect to MongoDB
+app.get('/', (req, res) => res.send('Api Running'));
 
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+// Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
 
-app.get('/', (req, res) => res.send('Hello world!'));
+const PORT = process.env.PORT || 5000; // HEROKU or LOACALHOST
 
-// Use Routes
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
-
-const port = process.env.PORT || 5000; // HEROKU or LOACALHOST
-
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
