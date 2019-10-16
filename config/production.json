@@ -1,0 +1,7 @@
+{
+    "mongoURI": "mongodb+srv://kyznec:9469869@devconnector-fhyqs.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "375cbf1f0b252d1725d0",
+    "githubSecret": "748790b03ee675b51849a91b0dd799ad6770b20e"
+  }
+  
